@@ -13,7 +13,7 @@ Corresponding PNG annotations are present in ``` pngs ``` folder.
     "bboxes": [ {
             "category":
             "category_id":
-            "bbox" : [x_min y_min x_max y_max]
+            "bbox" : [top_left_x, top_left_y, width, height]
         }
         .
         .
