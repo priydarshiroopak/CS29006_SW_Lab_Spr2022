@@ -8,8 +8,8 @@ for i in range(1, 10, 2):
 # prints: 1.. 3.. 5.. 7.. 9
 
 # Use of 'range' function
-# start: 0 (excluded, default)
-# stop: 5 (included)
+# start: 0 (included, default)
+# stop: 5 (excluded)
 # step: 1 (default)
 for i in range(5):
     print(i)

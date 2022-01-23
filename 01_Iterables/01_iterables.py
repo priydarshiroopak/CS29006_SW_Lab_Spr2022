@@ -1,6 +1,6 @@
-print("sum function works on iterbales: {}".format(sum([1, 2, 3])))
+print("sum function works on iterables: {}".format(sum([1, 2, 3])))
 
-print("sorted function works on iterbales: {}".format(sorted((-6, 8, 2, 0, 1.5))))
+print("sorted function works on iterables: {}".format(sorted((-6, 8, 2, 0, 1.5))))
 
 # ===============
 example_list = [2, None, -10, None, 4, 8]
