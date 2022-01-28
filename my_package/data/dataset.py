@@ -62,7 +62,5 @@ class Dataset(object):
         png_list = png_list.reshape([1, png_list.shape[0], png_list.shape[1]])/255
 
         annotations = [[c['category']]+c['bbox'] for c in self.data[idx]['bboxes']]
-        """ for c in self.data[idx]['bboxes']:
-            annotations.append([c['category']] + x['bbox']) """
 
         return {'image': img_list, 'gt_png_ann': png_list,'gt_bboxes': annotations}
