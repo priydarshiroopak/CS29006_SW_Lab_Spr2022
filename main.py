@@ -31,23 +31,28 @@ def experiment(annotation_file, segmentor, transforms, outputs):
 
     #Get the predictions from the segmentor.
     #Draw the segmentation maps on the image and save them.
-    _, my_image_height, my_image_width = data[2]['image'].shape
+    i = int(input("Enter number of image you want to perform analysis experiments on (0-9): "))
+    while(i<0 or i>9):
+        i = int(input("Enter valid number! (0-9): "))
+        
+    _, im_h, im_w = data[i]['image'].shape
     myanalysis = {'original': ('Original Image', []),
                   'flip': ('Horizontally Flipped', [FlipImage()]),
                   'blur': ('Blurred', [BlurImage(4)]),
-                  'twice': ('Twice Rescaled', [RescaleImage((2 * my_image_width, 2 * my_image_height))]),
-                  'half': ('Half Rescaled', [RescaleImage((int(my_image_width / 2), int(my_image_height / 2)))]),
+                  'twice': ('Twice Rescaled', [RescaleImage((2 * im_w, 2 * im_h))]),
+                  'half': ('Half Rescaled', [RescaleImage((int(im_w / 2), int(im_h / 2)))]),
                   'right': ('90 Degree Right Rotated', [RotateImage(-90)]),
                   '45deg': ('45 Degree Left Rotated', [RotateImage(45)])}
 
     #Do the required analysis experiments.
+
     for ind, item in enumerate(myanalysis.items()):
         key, val = item
         data.transforms = val[1]
-        pred_boxes, pred_masks, pred_class, pred_score = segmentor(data[2]['image'])
-        plot_visualization(data[2]['image'], pred_masks[:3], pred_boxes[:3], pred_class[:3], outputs + 'img2/{}.jpg'.format(key))
+        pred_boxes, pred_masks, pred_class, pred_score = segmentor(data[i]['image'])
+        plot_visualization(data[i]['image'], pred_masks[:3], pred_boxes[:3], pred_class[:3], outputs + 'img_analysis/{}.jpg'.format(key))
         plt.subplot(2, 4, ind + 1, title=val[0])
-        plt.imshow(Image.open(outputs + 'img2/{}.jpg'.format(key)))
+        plt.imshow(Image.open(outputs + 'img_analysis/{}.jpg'.format(key)))
     
     plt.savefig(outputs+'plotted image.jpg', bbox_inches='tight')
     plt.show()
